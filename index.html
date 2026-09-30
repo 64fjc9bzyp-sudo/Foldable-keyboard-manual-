@@ -11,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        brandBlue: '#0284c7',
-                        brandYellow: '#f59e0b',
-                        brandOrange: '#f97316',
+                        brandBlue: '#0284c7',        /* أزرق */
+                        amberOrange: '#f59e0b',      /* أصفر برتقالي */
+                        amberOrangeDark: '#d97706',  /* أصفر برتقالي داكن للتأثيرات */
                     }
                 }
             }
@@ -23,7 +23,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800&display=swap');
         body { font-family: 'Alexandria', sans-serif; transition: background-color 0.3s, color 0.3s; }
-        .key-highlight { fill: #f97316 !important; stroke: #ea580c !important; }
+        .key-highlight { fill: #f59e0b !important; stroke: #d97706 !important; }
         .key-text-highlight { fill: #ffffff !important; font-weight: bold; }
     </style>
 </head>
@@ -35,11 +35,11 @@
             <div class="bg-brandBlue p-2 rounded-xl text-white shadow-lg">
                 <i class="fa-solid fa-graduation-cap text-lg"></i>
             </div>
-            <span class="font-extrabold text-lg text-brandYellow" data-i18n="schoolName">مجمع مدرستي</span>
+            <span class="font-extrabold text-lg text-amberOrange" data-i18n="schoolName">مجمع مدرستي</span>
         </div>
         <div class="flex items-center gap-2">
             <button id="langBtn" onclick="toggleLang()" class="px-3 py-1.5 text-xs font-semibold bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700">English</button>
-            <button id="themeBtn" onclick="toggleTheme()" class="p-2 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 text-brandYellow">
+            <button id="themeBtn" onclick="toggleTheme()" class="p-2 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 text-amberOrange">
                 <i id="themeIcon" class="fa-solid fa-sun"></i>
             </button>
         </div>
@@ -60,12 +60,12 @@
                     <i class="fa-brands fa-apple text-4xl text-brandBlue group-hover:scale-110 transition-transform"></i>
                     <span class="font-bold text-sm">iOS / iPadOS</span>
                 </button>
-                <button onclick="showDetails('android')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-brandOrange rounded-2xl flex flex-col items-center gap-3 transition group">
-                    <i class="fa-brands fa-android text-4xl text-brandOrange group-hover:scale-110 transition-transform"></i>
+                <button onclick="showDetails('android')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-amberOrange rounded-2xl flex flex-col items-center gap-3 transition group">
+                    <i class="fa-brands fa-android text-4xl text-amberOrange group-hover:scale-110 transition-transform"></i>
                     <span class="font-bold text-sm">Android</span>
                 </button>
-                <button onclick="showDetails('windows')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-brandYellow rounded-2xl flex flex-col items-center gap-3 transition group">
-                    <i class="fa-brands fa-windows text-4xl text-brandYellow group-hover:scale-110 transition-transform"></i>
+                <button onclick="showDetails('windows')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-amberOrange rounded-2xl flex flex-col items-center gap-3 transition group">
+                    <i class="fa-brands fa-windows text-4xl text-amberOrange group-hover:scale-110 transition-transform"></i>
                     <span class="font-bold text-sm">Windows</span>
                 </button>
             </div>
@@ -74,7 +74,7 @@
         <!-- PAGE 2: Details & Instructions -->
         <div id="pageDetails" class="hidden space-y-6">
             <!-- Back Button -->
-            <button onclick="goHome()" class="inline-flex items-center gap-2 text-xs font-bold text-brandYellow bg-slate-800 px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition">
+            <button onclick="goHome()" class="inline-flex items-center gap-2 text-xs font-bold text-amberOrange bg-slate-800 px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition">
                 <i class="fa-solid fa-arrow-right dir-rtl:block hidden"></i>
                 <i class="fa-solid fa-arrow-left dir-ltr:block hidden"></i>
                 <span data-i18n="back">رجوع للقائمة الرئيسية</span>
@@ -84,7 +84,7 @@
 
             <!-- Step 1: System Mode -->
             <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
-                <h3 class="font-bold text-brandYellow text-sm" data-i18n="step1">1. تحديد نظام الجهاز (يُضغط مرة واحدة):</h3>
+                <h3 class="font-bold text-amberOrange text-sm" data-i18n="step1">1. تحديد نظام الجهاز (يُضغط مرة واحدة):</h3>
                 <p id="step1Text" class="text-xs text-slate-300"></p>
                 
                 <!-- Visual Keyboard Graphic -->
@@ -109,13 +109,13 @@
 
             <!-- Step 2: Switch Language -->
             <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
-                <h3 class="font-bold text-brandOrange text-sm" data-i18n="step2">2. طريقة تغيير اللغة (عربي / إنجليزي):</h3>
+                <h3 class="font-bold text-amberOrange text-sm" data-i18n="step2">2. طريقة تغيير اللغة (عربي / إنجليزي):</h3>
                 <p id="step2Text" class="text-xs text-slate-300 leading-relaxed"></p>
             </div>
 
             <!-- Global Note: Adding Keyboard Language in System Settings -->
             <div class="bg-amber-950/30 border border-amber-500/40 p-4 rounded-2xl space-y-2">
-                <h3 class="font-bold text-brandYellow text-xs" data-i18n="addLangTitle">💡 كيف تضيف اللغة العربية للكيبورد من إعدادات جهازك؟</h3>
+                <h3 class="font-bold text-amberOrange text-xs" data-i18n="addLangTitle">💡 كيف تضيف اللغة العربية للكيبورد من إعدادات جهازك؟</h3>
                 <p id="addLangText" class="text-xs text-amber-200/90 leading-relaxed font-medium"></p>
             </div>
         </div>
@@ -174,24 +174,24 @@
 
             if(system === 'ios') {
                 document.getElementById('deviceTitle').innerText = "iOS / iPadOS (آيفون / آيباد)";
-                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + A</b> معاً.";
-                document.getElementById('step2Text').innerHTML = "الطريقة الرئيسية: <b class='text-brandYellow'>Shift + Space</b> <br> (أو زر Caps Lock إذا كان مفعّلاً).";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-amberOrange'>Fn + A</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الرئيسية: <b class='text-amberOrange'>Shift + Space</b> <br> (أو زر Caps Lock إذا كان مفعّلاً).";
                 document.getElementById('addLangText').innerText = i18n[currentLang].iosAdd;
                 
                 document.getElementById('key-a').classList.add('key-highlight');
                 document.getElementById('text-a').classList.add('key-text-highlight');
             } else if(system === 'android') {
                 document.getElementById('deviceTitle').innerText = "Android (أندرويد)";
-                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + S</b> معاً.";
-                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-brandYellow'>Win + Space</b> <br> الطريقة الثانية: <b>Shift + Space</b>";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-amberOrange'>Fn + S</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-amberOrange'>Win + Space</b> <br> الطريقة الثانية: <b>Shift + Space</b>";
                 document.getElementById('addLangText').innerText = i18n[currentLang].androidAdd;
 
                 document.getElementById('key-s').classList.add('key-highlight');
                 document.getElementById('text-s').classList.add('key-text-highlight');
             } else {
                 document.getElementById('deviceTitle').innerText = "Windows (ويندوز)";
-                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + D</b> معاً.";
-                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-brandYellow'>Alt + Shift</b> <br> الطريقة الثانية: <b>Win + Space</b>";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-amberOrange'>Fn + D</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-amberOrange'>Alt + Shift</b> <br> الطريقة الثانية: <b>Win + Space</b>";
                 document.getElementById('addLangText').innerText = i18n[currentLang].winAdd;
 
                 document.getElementById('key-d').classList.add('key-highlight');

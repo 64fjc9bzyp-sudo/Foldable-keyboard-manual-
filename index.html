@@ -11,9 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        brandBlue: '#0284c7',   /* أزرق */
-                        brandYellow: '#f59e0b', /* أصفر */
-                        brandOrange: '#f97316', /* برتقالي */
+                        brandBlue: '#0284c7',
+                        brandYellow: '#f59e0b',
+                        brandOrange: '#f97316',
                     }
                 }
             }
@@ -163,7 +163,6 @@
             document.getElementById('pageHome').classList.add('hidden');
             document.getElementById('pageDetails').classList.remove('hidden');
 
-            // Reset SVG key highlights
             ['key-fn', 'key-a', 'key-s', 'key-d'].forEach(id => {
                 document.getElementById(id).classList.remove('key-highlight');
             });
@@ -171,7 +170,6 @@
                 document.getElementById(id).classList.remove('key-text-highlight');
             });
 
-            // Always highlight Fn
             document.getElementById('key-fn').classList.add('key-highlight');
 
             if(system === 'ios') {

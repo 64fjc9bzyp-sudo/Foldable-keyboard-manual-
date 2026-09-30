@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دليل لوحة مفاتيح AOAS | AOAS Keyboard Guide</title>
+    <title>دليل الكيبورد - مجمع مدرستي</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,16 +11,9 @@
             theme: {
                 extend: {
                     colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'Segoe UI', 'sans-serif'],
+                        brandBlue: '#0284c7',   /* أزرق */
+                        brandYellow: '#f59e0b', /* أصفر */
+                        brandOrange: '#f97316', /* برتقالي */
                     }
                 }
             }
@@ -28,330 +21,212 @@
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;600;700;800&family=Inter:wght@400;600;700;800&display=swap');
-        
-        body {
-            font-family: 'Alexandria', 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .key-cap {
-            background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 1px solid #cbd5e1;
-            border-bottom: 4px solid #94a3b8;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: all 0.15s ease;
-        }
-
-        .dark .key-cap {
-            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
-            border: 1px solid #475569;
-            border-bottom: 4px solid #0f172a;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-            color: #f8fafc;
-        }
-
-        .key-cap:active {
-            transform: translateY(2px);
-            border-bottom-width: 2px;
-        }
-
-        .device-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .device-card.active {
-            border-color: #0ea5e9;
-            box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.25);
-        }
-
-        /* Smooth fade-in animation */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@400;600;700;800&display=swap');
+        body { font-family: 'Alexandria', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        .key-highlight { fill: #f97316 !important; stroke: #ea580c !important; }
+        .key-text-highlight { fill: #ffffff !important; font-weight: bold; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200 dark:border-slate-800 transition-colors">
-        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="bg-brand-500 text-white p-2.5 rounded-xl shadow-lg shadow-brand-500/30 flex items-center justify-center">
-                    <i class="fa-solid font-bold fa-keyboard text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white leading-tight">AOAS Keyboard</h1>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium" data-i18n="subtitle">الدليل التفاعلي السريع</p>
-                </div>
+    <!-- Header -->
+    <header class="p-4 border-b border-slate-800 bg-slate-900/90 sticky top-0 z-50 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="bg-brandBlue p-2 rounded-xl text-white shadow-lg">
+                <i class="fa-solid fa-graduation-cap text-lg"></i>
             </div>
-
-            <div class="flex items-center gap-2">
-                <!-- Language Toggle -->
-                <button id="langToggleBtn" class="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                    <i class="fa-solid fa-globe text-slate-500"></i>
-                    <span id="langText">English</span>
-                </button>
-
-                <!-- Dark Mode Toggle -->
-                <button id="themeToggleBtn" aria-label="Toggle Theme" class="p-2 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                    <i id="themeIcon" class="fa-solid fa-moon"></i>
-                </button>
-            </div>
+            <span class="font-extrabold text-lg text-brandYellow" data-i18n="schoolName">مجمع مدرستي</span>
+        </div>
+        <div class="flex items-center gap-2">
+            <button id="langBtn" onclick="toggleLang()" class="px-3 py-1.5 text-xs font-semibold bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700">English</button>
+            <button id="themeBtn" onclick="toggleTheme()" class="p-2 bg-slate-800 rounded-lg border border-slate-700 hover:bg-slate-700 text-brandYellow">
+                <i id="themeIcon" class="fa-solid fa-sun"></i>
+            </button>
         </div>
     </header>
 
-    <main class="max-w-4xl mx-auto px-4 py-8 flex-1 w-full flex flex-col gap-8">
+    <!-- Main Content -->
+    <main class="max-w-2xl mx-auto p-4 flex-1 w-full flex flex-col justify-center">
+        
+        <!-- PAGE 1: Home / Device Selection -->
+        <div id="pageHome" class="space-y-6 text-center">
+            <div class="space-y-2">
+                <h1 class="text-2xl font-bold text-white" data-i18n="title">اختر نظام تشغيل جهازك</h1>
+                <p class="text-xs text-slate-400" data-i18n="subtitle">حدد نظام الجهاز لعرض طريقة الضبط وتغيير اللغة</p>
+            </div>
 
-        <!-- Title / Intro Section -->
-        <div class="text-center space-y-2">
-            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white" data-i18n="selectTitle">
-                اختر نظام تشغيل جهازك
-            </h2>
-            <p class="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto" data-i18n="selectDesc">
-                قم بتحديد نظام التشغيل الذي تريد ربط الكيبورد به لعرض الاختصارات والإعدادات المناسبة له.
-            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <button onclick="showDetails('ios')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-brandBlue rounded-2xl flex flex-col items-center gap-3 transition group">
+                    <i class="fa-brands fa-apple text-4xl text-brandBlue group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-sm">iOS / iPadOS</span>
+                </button>
+                <button onclick="showDetails('android')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-brandOrange rounded-2xl flex flex-col items-center gap-3 transition group">
+                    <i class="fa-brands fa-android text-4xl text-brandOrange group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-sm">Android</span>
+                </button>
+                <button onclick="showDetails('windows')" class="p-5 bg-slate-800 border-2 border-slate-700 hover:border-brandYellow rounded-2xl flex flex-col items-center gap-3 transition group">
+                    <i class="fa-brands fa-windows text-4xl text-brandYellow group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold text-sm">Windows</span>
+                </button>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            
-            <!-- iOS Button -->
-            <button onclick="selectDevice('ios')" id="btn-ios" class="device-card active bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 p-5 rounded-2xl text-center cursor-pointer flex sm:flex-col items-center justify-start sm:justify-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400 flex items-center justify-center text-2xl flex-shrink-0">
-                    <i class="fa-brands fa-apple"></i>
-                </div>
-                <div class="text-right sm:text-center">
-                    <h3 class="font-bold text-base text-slate-900 dark:text-white">iOS / iPadOS</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">آيفون / آيباد / ماك</p>
-                </div>
+        <!-- PAGE 2: Details & Instructions -->
+        <div id="pageDetails" class="hidden space-y-6">
+            <!-- Back Button -->
+            <button onclick="goHome()" class="inline-flex items-center gap-2 text-xs font-bold text-brandYellow bg-slate-800 px-3 py-2 rounded-lg border border-slate-700 hover:bg-slate-700 transition">
+                <i class="fa-solid fa-arrow-right dir-rtl:block hidden"></i>
+                <i class="fa-solid fa-arrow-left dir-ltr:block hidden"></i>
+                <span data-i18n="back">رجوع للقائمة الرئيسية</span>
             </button>
 
-            <!-- Android Button -->
-            <button onclick="selectDevice('android')" id="btn-android" class="device-card bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 p-5 rounded-2xl text-center cursor-pointer flex sm:flex-col items-center justify-start sm:justify-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-2xl flex-shrink-0">
-                    <i class="fa-brands fa-android"></i>
-                </div>
-                <div class="text-right sm:text-center">
-                    <h3 class="font-bold text-base text-slate-900 dark:text-white">Android</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">أجهزة أندرويد</p>
-                </div>
-            </button>
+            <h2 id="deviceTitle" class="text-xl font-bold text-brandBlue border-b border-slate-800 pb-2"></h2>
 
-            <!-- Windows Button -->
-            <button onclick="selectDevice('windows')" id="btn-windows" class="device-card bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 p-5 rounded-2xl text-center cursor-pointer flex sm:flex-col items-center justify-start sm:justify-center gap-4">
-                <div class="w-12 h-12 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-2xl flex-shrink-0">
-                    <i class="fa-brands fa-windows"></i>
+            <!-- Step 1: System Mode -->
+            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
+                <h3 class="font-bold text-brandYellow text-sm" data-i18n="step1">1. تحديد نظام الجهاز (يُضغط مرة واحدة):</h3>
+                <p id="step1Text" class="text-xs text-slate-300"></p>
+                
+                <!-- Visual Keyboard Graphic -->
+                <div class="bg-slate-900 p-4 rounded-xl border border-slate-700 flex justify-center">
+                    <svg viewBox="0 0 300 90" class="w-full max-w-xs">
+                        <rect width="300" height="90" rx="8" fill="#0f172a"/>
+                        <!-- Fn Key -->
+                        <rect id="key-fn" x="15" y="55" width="28" height="22" rx="4" fill="#334155" stroke="#475569"/>
+                        <text x="29" y="69" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="bold">Fn</text>
+                        <!-- A Key -->
+                        <rect id="key-a" x="35" y="28" width="22" height="22" rx="4" fill="#334155" stroke="#475569"/>
+                        <text id="text-a" x="46" y="42" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="bold">A</text>
+                        <!-- S Key -->
+                        <rect id="key-s" x="60" y="28" width="22" height="22" rx="4" fill="#334155" stroke="#475569"/>
+                        <text id="text-s" x="71" y="42" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="bold">S</text>
+                        <!-- D Key -->
+                        <rect id="key-d" x="85" y="28" width="22" height="22" rx="4" fill="#334155" stroke="#475569"/>
+                        <text id="text-d" x="96" y="42" font-size="9" fill="#94a3b8" text-anchor="middle" font-weight="bold">D</text>
+                    </svg>
                 </div>
-                <div class="text-right sm:text-center">
-                    <h3 class="font-bold text-base text-slate-900 dark:text-white">Windows</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">كمبيوتر ويندوز</p>
-                </div>
-            </button>
+            </div>
 
-        </div>
+            <!-- Step 2: Switch Language -->
+            <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 space-y-3">
+                <h3 class="font-bold text-brandOrange text-sm" data-i18n="step2">2. طريقة تغيير اللغة (عربي / إنجليزي):</h3>
+                <p id="step2Text" class="text-xs text-slate-300 leading-relaxed"></p>
+            </div>
 
-        <div id="instructionsContainer" class="space-y-6">
-            <!-- Dynamic instructions render here -->
+            <!-- Global Note: Adding Keyboard Language in System Settings -->
+            <div class="bg-amber-950/30 border border-amber-500/40 p-4 rounded-2xl space-y-2">
+                <h3 class="font-bold text-brandYellow text-xs" data-i18n="addLangTitle">💡 كيف تضيف اللغة العربية للكيبورد من إعدادات جهازك؟</h3>
+                <p id="addLangText" class="text-xs text-amber-200/90 leading-relaxed font-medium"></p>
+            </div>
         </div>
 
     </main>
 
-    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-slate-900 text-center text-xs text-slate-500 dark:text-slate-400">
-        <p data-i18n="footerText">دليل استخدام لوحة مفاتيح AOAS المتنقلة - جميع الحقوق محفوظة</p>
+    <!-- Footer -->
+    <footer class="p-3 text-center text-xs text-slate-500 border-t border-slate-800">
+        <span data-i18n="footer">جميع الحقوق محفوظة - مجمع مدرستي</span>
     </footer>
 
     <script>
-        // Translations Dictionary
-        const translations = {
+        const i18n = {
             ar: {
-                subtitle: "الدليل التفاعلي السريع",
-                selectTitle: "اختر نظام تشغيل جهازك",
-                selectDesc: "اضغط على نظام الجهاز الذي تستخدمه حالياً لعرض تعليمات الضبط وتغيير اللغة الخاصة به.",
-                step1Title: "الخطوة الأولى: ضبط وضع النظام",
-                step1Desc: "اضغط الزرين معاً مرة واحدة عند أول توصيل بالكيبورد لتكييف الأزرار مع نظامك:",
-                step2Title: "الخطوة الثانية: تبديل لغة الكتابة",
-                step2Desc: "استخدم الاختصار التالي للتحويل بين اللغة العربية والإنجليزية بسرعة:",
-                androidNoteTitle: "💡 تحذير مهم لمستخدمي نظام أندرويد:",
-                androidNoteDesc: "إذا لم تتغير اللغة معك بعد تجربة الاختصار، تأكد من إضافة اللغة العربية داخل إعدادات لوحة المفاتيح الخارجية من الهاتف عبر المسار التالي:",
-                androidPath: "الإعدادات 👈 الإدارة العامة (أو النظام) 👈 لوحة المفاتيح الهيكلية/الخارجية 👈 إضافة اللغة العربية",
-                footerText: "دليل استخدام لوحة مفاتيح AOAS المتنقلة",
-                sysSetBtn: "ضبط النظام",
-                langChangeBtn: "تغيير اللغة",
-                or: "أو"
+                schoolName: "مجمع مدرستي",
+                title: "اختر نظام تشغيل جهازك",
+                subtitle: "حدد نظام الجهاز لعرض طريقة الضبط وتغيير اللغة",
+                back: "رجوع للقائمة الرئيسية",
+                step1: "1. تحديد نظام الجهاز (يُضغط مرة واحدة):",
+                step2: "2. طريقة تغيير اللغة (عربي / إنجليزي):",
+                addLangTitle: "💡 كيف تضيف اللغة العربية للكيبورد من إعدادات جهازك؟",
+                footer: "جميع الحقوق محفوظة - مجمع مدرستي",
+                iosAdd: "الإعدادات 👈 عام 👈 لوحة المفاتيح 👈 لوحات المفاتيح 👈 إضافة لوحة مفاتيح جديدة 👈 اختر اللغة العربية.",
+                androidAdd: "الإعدادات 👈 الإدارة العامة 👈 لوحة المفاتيح الخارجية 👈 اختر اسم الكيبورد 👈 اضف اللغة العربية.",
+                winAdd: "الإعدادات 👈 الوقت واللغة 👈 اللغة والمنطقة 👈 إضافة لغة 👈 اختر العربية.",
             },
             en: {
-                subtitle: "Quick Interactive Guide",
-                selectTitle: "Select Your Device System",
-                selectDesc: "Click on your current operating system to display matching shortcut keys and layout setup instructions.",
-                step1Title: "Step 1: Set Operating System Mode",
-                step1Desc: "Press these keys together once upon connecting to match keyboard layout to your device:",
-                step2Title: "Step 2: Switch Input Language",
-                step2Desc: "Use this key combination to switch between Arabic and English:",
-                androidNoteTitle: "💡 Important Note for Android Users:",
-                androidNoteDesc: "If the language doesn't switch, ensure Arabic is added in your phone settings under external keyboard layout:",
-                androidPath: "Settings 👈 General Management (or System) 👈 Physical Keyboard 👈 Add Arabic Language",
-                footerText: "AOAS Portable Keyboard Interactive Manual",
-                sysSetBtn: "Set System",
-                langChangeBtn: "Switch Language",
-                or: "OR"
+                schoolName: "Madrasati Complex",
+                title: "Select Your Operating System",
+                subtitle: "Choose your device OS to view setup instructions",
+                back: "Back to Main Menu",
+                step1: "1. Set System Mode (Press once):",
+                step2: "2. Switch Input Language:",
+                addLangTitle: "💡 How to add Arabic language in your device settings:",
+                footer: "All Rights Reserved - Madrasati Complex",
+                iosAdd: "Settings 👈 General 👈 Keyboard 👈 Keyboards 👈 Add New Keyboard 👈 Select Arabic.",
+                androidAdd: "Settings 👈 General Management 👈 Physical Keyboard 👈 Tap Keyboard Name 👈 Add Arabic.",
+                winAdd: "Settings 👈 Time & Language 👈 Language & Region 👈 Add a language 👈 Select Arabic.",
             }
         };
 
-        // App State
         let currentLang = 'ar';
-        let currentDevice = 'ios';
 
-        // Device Data
-        const deviceData = {
-            ios: {
-                setKey: ['Fn', 'A'],
-                langKeys: [['Shift', 'Space']],
-                badgeColor: 'blue'
-            },
-            android: {
-                setKey: ['Fn', 'S'],
-                langKeys: [['Win', 'Space'], ['Shift', 'Space']],
-                hasNote: true,
-                badgeColor: 'emerald'
-            },
-            windows: {
-                setKey: ['Fn', 'D'],
-                langKeys: [['Alt', 'Shift'], ['Win', 'Space']],
-                badgeColor: 'indigo'
-            }
-        };
+        function showDetails(system) {
+            document.getElementById('pageHome').classList.add('hidden');
+            document.getElementById('pageDetails').classList.remove('hidden');
 
-        // UI Element References
-        const langToggleBtn = document.getElementById('langToggleBtn');
-        const langText = document.getElementById('langText');
-        const themeToggleBtn = document.getElementById('themeToggleBtn');
-        const themeIcon = document.getElementById('themeIcon');
-        const instructionsContainer = document.getElementById('instructionsContainer');
-
-        // Initial setup
-        window.addEventListener('DOMContentLoaded', () => {
-            // Check stored dark mode or system preference
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.classList.add('dark');
-            }
-            updateThemeIcon();
-            renderInstructions();
-        });
-
-        // Toggle Dark/Light Mode
-        themeToggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            updateThemeIcon();
-        });
-
-        function updateThemeIcon() {
-            const isDark = document.documentElement.classList.contains('dark');
-            themeIcon.className = isDark ? 'fa-solid fa-sun text-amber-400' : 'fa-solid fa-moon text-slate-600';
-        }
-
-        langToggleBtn.addEventListener('click', () => {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            langText.textContent = currentLang === 'ar' ? 'English' : 'عربي';
-
-            // Update static elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                if (translations[currentLang][key]) {
-                    el.textContent = translations[currentLang][key];
-                }
+            // Reset SVG key highlights
+            ['key-fn', 'key-a', 'key-s', 'key-d'].forEach(id => {
+                document.getElementById(id).classList.remove('key-highlight');
+            });
+            ['text-a', 'text-s', 'text-d'].forEach(id => {
+                document.getElementById(id).classList.remove('key-text-highlight');
             });
 
-            renderInstructions();
-        });
+            // Always highlight Fn
+            document.getElementById('key-fn').classList.add('key-highlight');
 
-        function selectDevice(device) {
-            currentDevice = device;
+            if(system === 'ios') {
+                document.getElementById('deviceTitle').innerText = "iOS / iPadOS (آيفون / آيباد)";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + A</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الرئيسية: <b class='text-brandYellow'>Shift + Space</b> <br> (أو زر Caps Lock إذا كان مفعّلاً).";
+                document.getElementById('addLangText').innerText = i18n[currentLang].iosAdd;
+                
+                document.getElementById('key-a').classList.add('key-highlight');
+                document.getElementById('text-a').classList.add('key-text-highlight');
+            } else if(system === 'android') {
+                document.getElementById('deviceTitle').innerText = "Android (أندرويد)";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + S</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-brandYellow'>Win + Space</b> <br> الطريقة الثانية: <b>Shift + Space</b>";
+                document.getElementById('addLangText').innerText = i18n[currentLang].androidAdd;
 
-            // Highlight Active Card
-            document.querySelectorAll('.device-card').forEach(card => card.classList.remove('active'));
-            document.getElementById(`btn-${device}`).classList.add('active');
+                document.getElementById('key-s').classList.add('key-highlight');
+                document.getElementById('text-s').classList.add('key-text-highlight');
+            } else {
+                document.getElementById('deviceTitle').innerText = "Windows (ويندوز)";
+                document.getElementById('step1Text').innerHTML = "اضغط على <b class='text-brandOrange'>Fn + D</b> معاً.";
+                document.getElementById('step2Text').innerHTML = "الطريقة الأولى: <b class='text-brandYellow'>Alt + Shift</b> <br> الطريقة الثانية: <b>Win + Space</b>";
+                document.getElementById('addLangText').innerText = i18n[currentLang].winAdd;
 
-            renderInstructions();
+                document.getElementById('key-d').classList.add('key-highlight');
+                document.getElementById('text-d').classList.add('key-text-highlight');
+            }
         }
 
-        function renderInstructions() {
-            const data = deviceData[currentDevice];
-            const t = translations[currentLang];
+        function goHome() {
+            document.getElementById('pageDetails').classList.add('hidden');
+            document.getElementById('pageHome').classList.remove('hidden');
+        }
 
-            // Render Keyboard Key Markup
-            const renderKey = (keyText) => `
-                <kbd class="key-cap px-3.5 py-2 rounded-xl text-sm font-bold tracking-wider inline-flex items-center justify-center min-w-[42px]">
-                    ${keyText}
-                </kbd>
-            `;
+        function toggleLang() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'English' : 'عربي';
+            
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.innerText = i18n[currentLang][key];
+            });
+        }
 
-            const renderShortcutGroup = (keys) => `
-                <div class="flex items-center gap-2 dir-ltr">
-                    ${keys.map((k, idx) => `
-                        ${renderKey(k)}
-                        ${idx < keys.length - 1 ? '<span class="text-slate-400 font-bold">+</span>' : ''}
-                    `).join('')}
-                </div>
-            `;
-
-            // Build html markup
-            let html = `
-                <div class="animate-fade-in space-y-6">
-                    
-                    <!-- Step 1 Card -->
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="w-8 h-8 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center text-sm">1</span>
-                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">${t.step1Title}</h3>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-5 leading-relaxed">${t.step1Desc}</p>
-                        
-                        <div class="bg-slate-50 dark:bg-slate-950/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
-                            <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">${t.sysSetBtn}:</span>
-                            ${renderShortcutGroup(data.setKey)}
-                        </div>
-                    </div>
-
-                    <!-- Step 2 Card -->
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="w-8 h-8 rounded-full bg-brand-500 text-white font-bold flex items-center justify-center text-sm">2</span>
-                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">${t.step2Title}</h3>
-                        </div>
-                        <p class="text-sm text-slate-600 dark:text-slate-400 mb-5 leading-relaxed">${t.step2Desc}</p>
-                        
-                        <div class="bg-slate-50 dark:bg-slate-950/60 p-4 rounded-xl border border-slate-100 dark:border-slate-800 space-y-3">
-                            ${data.langKeys.map((group, i) => `
-                                <div class="flex flex-wrap items-center justify-between gap-4">
-                                    <span class="text-sm font-semibold text-slate-700 dark:text-slate-300">${t.langChangeBtn} ${data.langKeys.length > 1 ? `(${i+1})` : ''}:</span>
-                                    ${renderShortcutGroup(group)}
-                                </div>
-                                ${i < data.langKeys.length - 1 ? `<div class="text-center my-1"><span class="text-xs text-slate-400 font-bold">${t.or}</span></div>` : ''}
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <!-- Android Settings Note Card -->
-                    ${data.hasNote ? `
-                        <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 rounded-2xl p-6 text-amber-900 dark:text-amber-200">
-                            <h4 class="font-bold text-base mb-2">${t.androidNoteTitle}</h4>
-                            <p class="text-xs sm:text-sm leading-relaxed mb-3">${t.androidNoteDesc}</p>
-                            <div class="bg-amber-100/70 dark:bg-amber-900/40 p-3 rounded-xl font-semibold text-xs sm:text-sm text-amber-950 dark:text-amber-100">
-                                ${t.androidPath}
-                            </div>
-                        </div>
-                    ` : ''}
-
-                </div>
-            `;
-
-            instructionsContainer.innerHTML = html;
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            const icon = document.getElementById('themeIcon');
+            if(isDark) {
+                document.body.className = "bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between";
+                icon.className = "fa-solid fa-sun";
+            } else {
+                document.body.className = "bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between";
+                icon.className = "fa-solid fa-moon text-slate-700";
+            }
         }
     </script>
 </body>
